@@ -15,9 +15,6 @@ import java.util.Scanner;
  */
 public class Game {
     
-       
-    
-    
         public class Player implements Runnable{
         public String sName;
         Socket socket;
@@ -28,6 +25,7 @@ public class Game {
         {
             this.socket = socket;
             this.sName = sName;
+            
         }
 
         @Override
@@ -41,6 +39,7 @@ public class Game {
                 {
                     output.println("Shipe");
                 }
+
             }
             catch(Exception e)
             {

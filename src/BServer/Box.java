@@ -10,5 +10,5 @@ package BServer;
  * @author pbone
  */
 public class Box {
-        private char contenuto = 'm';
+        public char contenuto = 'm';
 }
