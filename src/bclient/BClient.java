@@ -32,53 +32,49 @@ public class BClient {
     private JFrame frame = new JFrame("Naval Battle");
     private JLabel messageLabel = new JLabel("...");
 
-    private Square[] board = new Square[9];
-    private Square currentSquare;
+    /*private Square[] board = new Square[9];
+    private Square currentSquare;*/
 
     private Socket socket;
     private Scanner in;
     private PrintWriter out;
+    private Scanner scanner;
     
-    public BClient(String serverAddress) throws IOException{
-        
-        socket = new Socket(serverAddress, 6012);
-        in = new Scanner(socket.getInputStream());
-        out = new PrintWriter(socket.getOutputStream(), true);
-        
-        /*messageLabel.setBackground(Color.lightGray);
-        frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
-        
-        JPanel boardPanel = new JPanel();
-        boardPanel.setBackground(Color.black);
-        boardPanel.setLayout(new GridLayout(21, 21, 2, 2));
-        
-        for (int i = 0; i < board.length; i++) {
-            final int j = i;
-            board[i] = new Square();
-            board[i].addMouseListener(new MouseAdapter() {
-                public void mousePressed(MouseEvent e) {
-                    currentSquare = board[j];
-                    out.println("MOVE " + j);
-                }
-            });
-            boardPanel.add(board[i]);
-        }
-        frame.getContentPane().add(boardPanel, BorderLayout.CENTER);*/
+    
+    public void barca(){
+        System.out.println("inserisci le coordinate della barca");
+            
+            System.out.println("Poppa:");
+            System.out.println("X=");
+            out.println(scanner.nextLine());
+            System.out.println("Y=");
+            out.println(scanner.nextLine());
+            
+            System.out.println("Prua:");
+            System.out.println("X=");
+            out.println(scanner.nextLine());
+            System.out.println("Y=");
+            out.println(scanner.nextLine());
+            
+            System.out.println(in.nextLine());
     }
     
     public static void main(String[] args) throws IOException{
         
-        BClient client = new BClient("172.16.10.72");//ip bonechi lai2-04
+        //ip bonechi lai2-04 - "172.16.10.72"
         
-        /*try (Socket socket = new Socket("172.16.10.72", 6012)) {
-            Scanner scanner = new Scanner(System.in);
+        try (Socket socket = new Socket("172.16.10.72", 6012)) {
+            
             Scanner in = new Scanner(socket.getInputStream());
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            while (scanner.hasNextLine()) {
+            Scanner scanner = new Scanner(System.in);
+            
+            /*while (scanner.hasNextLine()) {
                 out.println(scanner.nextLine());
                 System.out.println(in.nextLine());
-            }
-        }*/
+            }*/
+        }
     }
+    
     
 }
