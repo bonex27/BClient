@@ -7,6 +7,7 @@ package BServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,6 +21,7 @@ public class NavalBattleServer {
      */
      static Box bPlayerOne[][] = new Box[21][21];
      static Box bPlayerTwo[][] = new Box[21][21];
+     static ArrayList<Boat> Boats = new ArrayList<Boat>();//Riempito e clonato per ogni giocatore
     public static void main(String[] args) throws IOException 
     {
         
@@ -31,12 +33,11 @@ public class NavalBattleServer {
             ExecutorService ListaConnessioni = Executors.newFixedThreadPool(2);
             while(true)
             {
-                
-                
-                ListaConnessioni.execute(new Game(server.accept(),"Player1"));
-                initMatrix (bPlayerOne);//Inizializzazione matrice a mare
-                ListaConnessioni.execute(new Game(server.accept(),"Player2"));
+                initMatrix (bPlayerOne);//Inizializzazione matrice a m
                 initMatrix (bPlayerTwo);
+                ListaConnessioni.execute(new Game(server.accept(),"Player1",bPlayerOne,Boats));              
+                ListaConnessioni.execute(new Game(server.accept(),"Player2",bPlayerTwo,Boats));
+                
             }
         }
         catch(Exception e)
@@ -48,11 +49,12 @@ public class NavalBattleServer {
     }
         static void initMatrix(Box a[][])
         {
+            Box b = new Box();
            for(int i = 0; i<21;i++)
          {
-             for(int j = 0; j<21;i++)
+             for(int j = 0; j<21;j++)
             {
-             a[i][j].contenuto = 'm';
+             a[i][j] = b;
             }
          } 
         }

@@ -10,19 +10,24 @@ import java.util.ArrayList;
 /**
  *
  * @author pbone
+ * @param iLunghezza
+ * Boat lenght
+ * @param bPosizione
+ * Box occuped by this boat
+ * 
  */
 public class Boat {
     public  int iLunghezza ;
-    public Game p;
     public ArrayList<Box> bPosizione;
 
-    public Boat(int iLunghezza, Game p, Box[] bPosizione) {
+    public Boat(int iLunghezza) {
         this.iLunghezza=iLunghezza;
-        this.p = p;
-        this.bPosizione =new ArrayList <Box>();
+        this.bPosizione = new ArrayList <Box>();
     }
     
     /**
+     * @param a
+     * Boat how need check
     *@code Check if a boat is alive and if is true it return  true
     */
     public boolean checkCondizione(Boat a)

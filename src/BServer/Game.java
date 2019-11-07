@@ -5,8 +5,10 @@
  */
 package BServer;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,15 +18,18 @@ import java.util.Scanner;
 public class Game implements Runnable{
 
     public String sName;
-        Socket socket;
-        Scanner input;
+    Socket socket;
+    Scanner input;
+    public ArrayList<Boat> Boats = new ArrayList<Boat>();;
+    public Box refGrid[][];
 
         PrintWriter output;
-        public Game(Socket socket, String sName) 
+        public Game(Socket socket, String sName,Box refGrid[][],ArrayList<Boat> Boats) 
         {
             this.socket = socket;
             this.sName = sName;
-            
+            this.refGrid = refGrid;
+            this.Boats = (ArrayList)Boats.clone();//Copia delle barche pronte a esssere inserite
         }
 
         @Override
@@ -32,15 +37,16 @@ public class Game implements Runnable{
         {
             try
             {
+                System.out.println(this.sName+ " connesso!");
                 input = new Scanner(socket.getInputStream());
                 output = new PrintWriter(socket.getOutputStream(),true);
                 while(input.hasNextLine())
                 {
-                    output.println("Shipe");
+                    output.println("Sei il " + this.sName);
                 }
 
             }
-            catch(Exception e)
+            catch(IOException e)
             {
                 System.out.println("Errore class player: " + e);
             }
@@ -51,7 +57,8 @@ public class Game implements Runnable{
             {
                 for(int j = y1; i<y2;i++)
                 {
-                    
+                  refGrid[i][j].contenuto = 'b';
+                  refGrid[i][j].nomeBarca=boatName;
                 }
             }
         }
