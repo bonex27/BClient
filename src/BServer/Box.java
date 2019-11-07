@@ -11,4 +11,5 @@ package BServer;
  */
 public class Box {
         public char contenuto = 'm';
+        public String nomeBarca;
 }

@@ -13,13 +13,28 @@ import java.util.ArrayList;
  */
 public class Boat {
     public  int iLunghezza ;
-    public Game.Player p;
+    public Game p;
     public ArrayList<Box> bPosizione;
 
-    public Boat(int iLunghezza, Game.Player p, Box[] bPosizione) {
+    public Boat(int iLunghezza, Game p, Box[] bPosizione) {
         this.iLunghezza=iLunghezza;
         this.p = p;
         this.bPosizione =new ArrayList <Box>();
+    }
+    
+    /**
+    *@code Check if a boat is alive and if is true it return  true
+    */
+    public boolean checkCondizione(Boat a)
+    {
+        for(int i = 0; i < a.iLunghezza;i++)
+        {
+            if(a.bPosizione.get(i).contenuto == 'm')
+            {
+                return true;
+            }   
+        }
+        return false;
     }
     
 }

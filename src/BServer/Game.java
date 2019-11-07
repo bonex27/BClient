@@ -13,15 +13,14 @@ import java.util.Scanner;
  *
  * @author informatica
  */
-public class Game {
-    
-        public class Player implements Runnable{
-        public String sName;
+public class Game implements Runnable{
+
+    public String sName;
         Socket socket;
         Scanner input;
 
         PrintWriter output;
-        public Player(Socket socket, String sName) 
+        public Game(Socket socket, String sName) 
         {
             this.socket = socket;
             this.sName = sName;
@@ -46,8 +45,16 @@ public class Game {
                 System.out.println("Errore class player: " + e);
             }
         }
-
-    }
+        public void setBoat(int x1,int x2,int y1,int y2,String boatName)
+        {
+            for(int i = x1;i <= x2;i++)
+            {
+                for(int j = y1; i<y2;i++)
+                {
+                    
+                }
+            }
+        }
     }
     
 

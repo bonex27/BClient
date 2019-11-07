@@ -18,24 +18,25 @@ public class NavalBattleServer {
     /**
      * @param args
      */
-     
+     static Box bPlayerOne[][] = new Box[21][21];
+     static Box bPlayerTwo[][] = new Box[21][21];
     public static void main(String[] args) throws IOException 
     {
-        Box bPlayerOne[][] = new Box[21][21];
-        Box bPlayerTwo[][] = new Box[21][21];
-        initMatrix(bPlayerOne);
-        initMatrix(bPlayerTwo);
-        try{      
+        
+        
+        try{ 
+            
             ServerSocket server = new ServerSocket(6012);
             System.out.println("BServer is onine!");
             ExecutorService ListaConnessioni = Executors.newFixedThreadPool(2);
             while(true)
             {
-                Game game = new Game();
                 
                 
-                ListaConnessioni.execute(game.new Player(server.accept(),"Player1"));
-                ListaConnessioni.execute(game.new Player(server.accept(),"Player2"));
+                ListaConnessioni.execute(new Game(server.accept(),"Player1"));
+                initMatrix (bPlayerOne);//Inizializzazione matrice a mare
+                ListaConnessioni.execute(new Game(server.accept(),"Player2"));
+                initMatrix (bPlayerTwo);
             }
         }
         catch(Exception e)
@@ -43,8 +44,9 @@ public class NavalBattleServer {
             System.out.println("Errore server"+ e);
         }
         
+        
     }
-    static void initMatrix(Box a[][])
+        static void initMatrix(Box a[][])
         {
            for(int i = 0; i<21;i++)
          {
@@ -54,5 +56,6 @@ public class NavalBattleServer {
             }
          } 
         }
+    
     
 }
