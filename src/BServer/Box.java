@@ -7,7 +7,7 @@ package BServer;
 
 /**
  *
- * @author pbone
+ * @author Bonex & Admir M.
  */
 public class Box {
         public char contenuto = 'm';

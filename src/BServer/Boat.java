@@ -8,8 +8,7 @@ package BServer;
 import java.util.ArrayList;
 
 /**
- *
- * @author pbone
+ * @author Bonex & Admir M.
  * @param iLunghezza
  * Boat lenght
  * @param bPosizione

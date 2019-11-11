@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 /**
  *
- * @author informatica
+ * @author Bonex & Admir M.
  */
 public class NavalBattleServer { 
     /**
@@ -35,8 +35,8 @@ public class NavalBattleServer {
             {
                 initMatrix (bPlayerOne);//Inizializzazione matrice a m
                 initMatrix (bPlayerTwo);
-                ListaConnessioni.execute(new Game(server.accept(),"Player1",bPlayerOne,Boats));              
-                ListaConnessioni.execute(new Game(server.accept(),"Player2",bPlayerTwo,Boats));
+                ListaConnessioni.execute(new Game(server.accept(),"Player1",bPlayerOne,bPlayerTwo,Boats));              
+                ListaConnessioni.execute(new Game(server.accept(),"Player2",bPlayerTwo,bPlayerOne,Boats));
                 
             }
         }
