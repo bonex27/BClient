@@ -53,14 +53,39 @@ public class Game implements Runnable{
         }
         public void setBoat(int x1,int x2,int y1,int y2,String boatName)
         {
-            for(int i = x1;i <= x2;i++)
+            if(checkSpazio(x1,x2,y1,y2) == true)
+            {
+                for(int i = x1;i <= x2;i++)
+                    {
+                        for(int j = y1; i<y2;i++)
+                        {
+                            refGrid[i][j].contenuto = 'b';
+                            refGrid[i][j].nomeBarca=boatName;
+                        }
+                    }
+            }
+            else//da settare errore per il client!
+                System.out.println("Barche vicine!");
+            
+        }
+        public boolean checkSpazio(int x1,int x2,int y1,int y2)//Controlla in tutte le 8 caselle vicine 
+        {
+         for(int i = x1;i <= x2;i++)
             {
                 for(int j = y1; i<y2;i++)
                 {
-                  refGrid[i][j].contenuto = 'b';
-                  refGrid[i][j].nomeBarca=boatName;
+                    if(   refGrid[i][j+1].contenuto != 'm' &&  
+                          refGrid[i][j-1].contenuto != 'm' &&
+                          refGrid[i+1][j+1].contenuto != 'm' &&
+                          refGrid[i+1][j-1].contenuto != 'm' &&
+                          refGrid[i+1][j].contenuto != 'm' &&  
+                          refGrid[i-1][j+1].contenuto != 'm' &&
+                          refGrid[i-1][j-1].contenuto != 'm' &&
+                          refGrid[i-1][j].contenuto != 'm')
+                        return false;                  
                 }
-            }
+            }   
+        return true; // se posizione libera
         }
     }
     
