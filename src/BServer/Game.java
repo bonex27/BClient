@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -24,6 +25,9 @@ public class Game implements Runnable{
     private Box refGrid[][];
     private Box refOpponent[][];
     PrintWriter output;
+    String comando;
+    String[] arrOfStr;
+    String player;
     
     public Game(Socket socket, String sName,Box refGrid[][],Box refOpponent[][],ArrayList<Boat> Boats) 
     {
@@ -45,6 +49,22 @@ public class Game implements Runnable{
             while(input.hasNextLine())
             {
                 output.println("Sei il " + this.sName);
+                for(int i = 0; i < i;i++)
+                {
+                    output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
+                    comando = input.nextLine();
+                    arrOfStr= comando.split("@", 4);
+                    this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
+                    
+                }
+                    
+                
+                
+                
+               // showMatrix();
+                //comando = input.nextLine();
+//                
+              
             }
 
         }
@@ -53,7 +73,24 @@ public class Game implements Runnable{
             System.out.println("Errore class player: " + e);
         }
     }
-    public String setBoat(int x,int y,char cOr,String boatName,Boat b)
+    private void showMatrix()
+    {
+        String a = "";
+        for(int i = 0; i<21;i++)
+         {
+             for(int j = 0; j<21;j++)
+            {
+                a += refGrid[i][j].contenuto+"|";
+                
+            }
+             
+             a+="#";
+         } 
+        output.print(a);
+    }
+    
+            
+    private String setBoat(int x,int y,char cOr,String boatName,Boat b)
     {
         if(this.checkSpazio(x, y, b.iLunghezza, cOr) == true)
         {
@@ -127,6 +164,25 @@ public class Game implements Runnable{
         }       
         return false;
     }
+    
+    
+    public boolean attackBoat(int x,int y)
+    {
+        //for(int i=0;i<)
+       if(refOpponent[x][y].contenuto=='b'&& refOpponent[x][y].contenuto=='m')
+         {
+            refOpponent[x][y].contenuto='d';
+            
+               return true;
+         }
+        else if(refOpponent[x][y].contenuto=='d')
+         {
+                return false;
+          }
+           
+        return false;
+    }
+  
 }
     
 

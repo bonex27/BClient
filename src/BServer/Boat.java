@@ -18,10 +18,12 @@ import java.util.ArrayList;
 public class Boat {
     public  int iLunghezza ;
     public ArrayList<Box> bPosizione;
+    public String nome;
 
-    public Boat(int iLunghezza) {
+    public Boat(int iLunghezza,String nome) {
         this.iLunghezza=iLunghezza;
-        this.bPosizione = new ArrayList <Box>();
+        this.nome = nome;
+        //this.bPosizione = new ArrayList <Box>();
     }
     
     /**

@@ -19,15 +19,30 @@ public class NavalBattleServer {
     /**
      * @param args
      */
-     static Box bPlayerOne[][] = new Box[21][21];
-     static Box bPlayerTwo[][] = new Box[21][21];
-     static ArrayList<Boat> Boats = new ArrayList<Boat>();//Riempito e clonato per ogni giocatore
+    static int turnPlay = 1;
+    static Box bPlayerOne[][] = new Box[21][21];
+    static Box bPlayerTwo[][] = new Box[21][21]; 
+    static ArrayList<Boat> Boats = new ArrayList<Boat>();//Riempito e clonato per ogni giocatore
     public static void main(String[] args) throws IOException 
     {
         
         
-        try{ 
-            
+        try{
+            Boat b1 = new Boat(2,"b1");
+            Boats.add(b1);
+            Boat b2 = new Boat(2,"b2");
+            Boats.add(b1);
+            Boat b3 = new Boat(2,"b3");
+            Boats.add(b1);
+            Boat b4 = new Boat(3,"b4");
+            Boats.add(b1);
+            Boat b5 = new Boat(3,"b5");
+            Boats.add(b1);
+            Boat b6 = new Boat(4,"b6");
+            Boats.add(b1);
+            Boat b7 = new Boat(5,"b7");
+            Boats.add(b1);
+                
             ServerSocket server = new ServerSocket(6012);
             System.out.println("BServer is onine!");
             ExecutorService ListaConnessioni = Executors.newFixedThreadPool(2);
@@ -37,7 +52,6 @@ public class NavalBattleServer {
                 initMatrix (bPlayerTwo);
                 ListaConnessioni.execute(new Game(server.accept(),"Player1",bPlayerOne,bPlayerTwo,Boats));              
                 ListaConnessioni.execute(new Game(server.accept(),"Player2",bPlayerTwo,bPlayerOne,Boats));
-                
             }
         }
         catch(Exception e)
