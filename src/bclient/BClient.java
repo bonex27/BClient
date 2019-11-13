@@ -32,27 +32,24 @@ public class BClient {
     private PrintWriter out;
     private Scanner scanner;
     
-    public void addB(Scanner scanner){
-        System.out.println("inserisci le coordinate della barca");
-            
-        System.out.println("In formato: X Y lunghezza v(verticale)/o(orizzontale)");
-        out.println(scanner.nextLine());
-    }
+    
     
     public static void main(String[] args) throws IOException{
         
         //ip bonechi lai2-04 - "172.16.10.72"
         
-        try (Socket socket = new Socket("172.16.10.72", 6012)) {
+        try (Socket socket = new Socket("172.16.10.72" + "", 6012)) {
             
-            Scanner in = new Scanner(socket.getInputStream());
+            /*Scanner in = new Scanner(socket.getInputStream());
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
             
-            /*while (scanner.hasNextLine()) {
-                out.println(scanner.nextLine());
-                System.out.println(in.nextLine());
+            while(true){
+                
             }*/
+            
+            Game g = new Game(socket);
+            g.addB();
         }
     }
     
