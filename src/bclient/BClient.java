@@ -5,11 +5,6 @@
  */
 package bclient;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -32,31 +27,16 @@ public class BClient {
     private JFrame frame = new JFrame("Naval Battle");
     private JLabel messageLabel = new JLabel("...");
 
-    /*private Square[] board = new Square[9];
-    private Square currentSquare;*/
-
     private Socket socket;
     private Scanner in;
     private PrintWriter out;
     private Scanner scanner;
     
-    
-    public void barca(){
+    public void addB(Scanner scanner){
         System.out.println("inserisci le coordinate della barca");
             
-            System.out.println("Poppa:");
-            System.out.println("X=");
-            out.println(scanner.nextLine());
-            System.out.println("Y=");
-            out.println(scanner.nextLine());
-            
-            System.out.println("Prua:");
-            System.out.println("X=");
-            out.println(scanner.nextLine());
-            System.out.println("Y=");
-            out.println(scanner.nextLine());
-            
-            System.out.println(in.nextLine());
+        System.out.println("In formato: X Y lunghezza v(verticale)/o(orizzontale)");
+        out.println(scanner.nextLine());
     }
     
     public static void main(String[] args) throws IOException{
