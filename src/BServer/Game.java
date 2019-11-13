@@ -96,6 +96,24 @@ public class Game implements Runnable{
         }   
     return true; // se posizione libera
     }
+    
+    
+    public boolean attackBoat(int x,int y)
+    {
+        //for(int i=0;i<)
+       if(refOpponent[x][y].contenuto=='b'&& refOpponent[x][y].contenuto=='m')
+         {
+            refOpponent[x][y].contenuto='d';
+            
+               return true;
+         }
+        else if(refOpponent[x][y].contenuto=='d')
+         {
+                return false;
+          }
+           
+        
+    }
 }
     
 
