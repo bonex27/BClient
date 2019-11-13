@@ -54,6 +54,8 @@ public class NavalBattleServer {
          {
              for(int j = 0; j<21;j++)
             {
+                b.x = i;
+                b.y = j;
              a[i][j] = b;
             }
          } 

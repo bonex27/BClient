@@ -17,12 +17,12 @@ import java.util.Scanner;
  */
 public class Game implements Runnable{
 
-    public String sName;
+    private String sName;
     Socket socket;
     Scanner input;
-    public ArrayList<Boat> Boats = new ArrayList<Boat>();
-    public Box refGrid[][];
-    public Box refOpponent[][];
+    private ArrayList<Boat> Boats = new ArrayList<Boat>();
+    private Box refGrid[][];
+    private Box refOpponent[][];
     PrintWriter output;
     
     public Game(Socket socket, String sName,Box refGrid[][],Box refOpponent[][],ArrayList<Boat> Boats) 
@@ -53,48 +53,79 @@ public class Game implements Runnable{
             System.out.println("Errore class player: " + e);
         }
     }
-    public void setBoat(int x1,int x2,int y1,int y2,String boatName)
+    public String setBoat(int x,int y,char cOr,String boatName,Boat b)
     {
-        if(x1 == x2 || y1 == y2)
+        if(this.checkSpazio(x, y, b.iLunghezza, cOr) == true)
         {
-            if(checkSpazio(x1,x2,y1,y2) == true)
+            
+        
+            int iL;
+            if(cOr == 'v')
             {
-                for(int i = x1;i <= x2;i++)
+                 iL = x;
+                 for(int i = 0; i < b.iLunghezza;i++, iL++)
                     {
-                        for(int j = y1; i<y2;i++)
-                        {
-                            refGrid[i][j].contenuto = 'b';
-                            refGrid[i][j].nomeBarca=boatName;
-                        }
+                        refGrid[iL][y].contenuto = 'b';
+                        refGrid[iL][y].nomeBarca= boatName;
+
                     }
             }
-            else//da settare errore per il client!
-                System.out.println("Barche vicine!");
+            else if(cOr == 'o')
+            {
+                iL = y;
+            for(int i = 0; i < b.iLunghezza;i++, iL++)
+                {
+                    refGrid[x][iL].contenuto = 'b';
+                    refGrid[x][iL].nomeBarca= boatName;
+                }
             }
+            return "Barca aggiunta!";
+        }
         else
         {
-            System.out.println("Errore, orizzontale o verticale");
+          return "Barca vicina!";  
         }
+        
 
     }
-    public boolean checkSpazio(int x1,int x2,int y1,int y2)//Controlla in tutte le 8 caselle vicine 
+    public boolean checkSpazio(int x,int y,int iLung,char cOr)//Controlla in tutte le 8 caselle vicine 
     {
-     for(int i = x1;i <= x2;i++)
+        int iL;
+        if(cOr == 'v')
         {
-            for(int j = y1; i<y2;i++)
-            {
-                if(   refGrid[i][j+1].contenuto != 'm' &&  
-                      refGrid[i][j-1].contenuto != 'm' &&
-                      refGrid[i+1][j+1].contenuto != 'm' &&
-                      refGrid[i+1][j-1].contenuto != 'm' &&
-                      refGrid[i+1][j].contenuto != 'm' &&  
-                      refGrid[i-1][j+1].contenuto != 'm' &&
-                      refGrid[i-1][j-1].contenuto != 'm' &&
-                      refGrid[i-1][j].contenuto != 'm')
-                    return false;                  
-            }
-        }   
-    return true; // se posizione libera
+             iL = x;
+             for(int i = 0; i < iLung;i++, iL++)
+           {
+                   if(   refGrid[iL][y].contenuto != 'm' &&  
+                         refGrid[iL][y].contenuto != 'm' &&
+                         refGrid[iL][y].contenuto != 'm' &&
+                         refGrid[iL][y].contenuto != 'm' &&
+                         refGrid[iL][y].contenuto != 'm' &&  
+                         refGrid[iL][y].contenuto != 'm' &&
+                         refGrid[iL][y].contenuto != 'm' &&
+                         refGrid[iL][y].contenuto != 'm')
+                       return false;                  
+           }   
+        return true;
+        }
+        else if(cOr == 'o')
+        {
+            iL = y;
+             for(int i = 0; i < iLung;i++, iL++)
+           {
+                   if(   refGrid[x][iL].contenuto != 'm' &&  
+                         refGrid[x][iL].contenuto != 'm' &&
+                         refGrid[x][iL].contenuto != 'm' &&
+                         refGrid[x][iL].contenuto != 'm' &&
+                         refGrid[x][iL].contenuto != 'm' &&  
+                         refGrid[x][iL].contenuto != 'm' &&
+                         refGrid[x][iL].contenuto != 'm' &&
+                         refGrid[x][iL].contenuto != 'm')
+                       return false;                  
+           }   
+        return true;
+        }       
+        return false;
     }
 }
     
