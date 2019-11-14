@@ -19,12 +19,16 @@ public class NavalBattleServer {
     /**
      * @param args
      */
-    static int turnPlay = 1;
+    //static int turnPlay = 1;
+    
     static Box bPlayerOne[][] = new Box[21][21];
     static Box bPlayerTwo[][] = new Box[21][21]; 
     static ArrayList<Boat> Boats = new ArrayList<Boat>();//Riempito e clonato per ogni giocatore
+    static Game currentPlayer;
     public static void main(String[] args) throws IOException 
     {
+           initMatrix (bPlayerOne);//Inizializzazione matrice a m
+                initMatrix (bPlayerTwo);
         
         
         try{
@@ -48,10 +52,9 @@ public class NavalBattleServer {
             ExecutorService ListaConnessioni = Executors.newFixedThreadPool(2);
             while(true)
             {
-                initMatrix (bPlayerOne);//Inizializzazione matrice a m
-                initMatrix (bPlayerTwo);
-                ListaConnessioni.execute(new Game(server.accept(),"Player1",bPlayerOne,bPlayerTwo,Boats));              
-                ListaConnessioni.execute(new Game(server.accept(),"Player2",bPlayerTwo,bPlayerOne,Boats));
+             
+                ListaConnessioni.execute(new Game(server.accept(),'1',bPlayerOne,bPlayerTwo,Boats));              
+                ListaConnessioni.execute(new Game(server.accept(),'2',bPlayerTwo,bPlayerOne,Boats));
             }
         }
         catch(Exception e)

@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,18 +20,19 @@ import java.util.Scanner;
  */
 public class Game implements Runnable{
 
-    private String sName;
+    private char sName;
+    Game opponent;
+    Game concurrent;
     Socket socket;
     Scanner input;
     private ArrayList<Boat> Boats = new ArrayList<Boat>();
     private Box refGrid[][];
     private Box refOpponent[][];
     PrintWriter output;
-    String comando;
+
     String[] arrOfStr;
-    String player;
     
-    public Game(Socket socket, String sName,Box refGrid[][],Box refOpponent[][],ArrayList<Boat> Boats) 
+    public Game(Socket socket, char sName,Box refGrid[][],Box refOpponent[][],ArrayList<Boat> Boats) 
     {
         this.socket = socket;
         this.sName = sName;
@@ -41,38 +44,45 @@ public class Game implements Runnable{
     @Override
     public void run() 
     {
-        try
-        {
+        try {
+            //        try {
+            
             System.out.println(this.sName+ " connesso!");
-            input = new Scanner(socket.getInputStream());
-            output = new PrintWriter(socket.getOutputStream(),true);
-            while(input.hasNextLine())
-            {
-                output.println("Sei il " + this.sName);
-                for(int i = 0; i < i;i++)
-                {
-                    output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
-                    comando = input.nextLine();
-                    arrOfStr= comando.split("@", 4);
-                    this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
-                    
-                }
-                    
-                
-                
-                
-               // showMatrix();
-                //comando = input.nextLine();
-//                
-              
-            }
+            setup();
+            prova();
+            
+//            input = new Scanner(socket.getInputStream());
+//            output = new PrintWriter(socket.getOutputStream(),true);
+//            while(true)
+//            {
+//               output.println("Sei il " + this.sName);
+//               
+//                for(int i = 0; i < i;i++)
+//                {
+//                    output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
+////                    comando = input.nextLine();
+////                    arrOfStr= comando.split("@", 4);
+//                   // this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
+////                   setup();
+//                }
+//
+//
+//
+//                 }
 
-        }
-        catch(IOException e)
-        {
-            System.out.println("Errore class player: " + e);
+//comando = input.nextLine();
+                          
+//        }
+//        catch(IOException e)
+//        {
+//            System.out.println("Errore class player: " + e);
+//                // Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
     private void showMatrix()
     {
         String a = "";
@@ -86,7 +96,8 @@ public class Game implements Runnable{
              
              a+="#";
          } 
-        output.print(a);
+       // output.println(a);
+        output.println(a);
     }
     
             
@@ -183,6 +194,47 @@ public class Game implements Runnable{
         return false;
     }
   
+    public void setup() throws IOException
+    {
+        //System.out.println(this.sName+ " connesso!");
+         
+            
+            if(this.sName == '1')
+            {
+               
+                NavalBattleServer.currentPlayer=this;
+          
+                System.out.println("aspettare l'altro giocatore");
+            }
+            else
+            {
+                 NavalBattleServer.currentPlayer.opponent=this;
+                opponent=NavalBattleServer.currentPlayer;
+                
+            }
+            
+    }
+    //controllo il turno del giocatore e se hai un avversario
+    public synchronized void move( Game player) {
+        if (player != concurrent) {
+            throw new IllegalStateException("Not your turn");
+        } else if (player.opponent == null) {
+            throw new IllegalStateException("You don't have an opponent yet");
+        } 
+        
+        concurrent = concurrent.opponent;
+    }
+    
+    private void prova() throws IOException
+    {
+       
+            move(this);
+           while (input.hasNextLine())
+           {
+               output.println("cioa");
+           }
+    }
+
 }
     
 
