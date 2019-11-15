@@ -24,21 +24,12 @@ public class BClient {
      * @throws java.io.IOException
      */
     
-    private JFrame frame = new JFrame("Naval Battle");
-    private JLabel messageLabel = new JLabel("...");
-
-    private Socket socket;
-    private Scanner in;
-    private PrintWriter out;
-    private Scanner scanner;
-    
-    
-    
+  
     public static void main(String[] args) throws IOException{
         
         //ip bonechi lai2-04 - "172.16.10.72"
         
-        try (Socket socket = new Socket("127.0.0.1" + "", 6012)) {
+        try (Socket socket = new Socket("172.16.13.118" , 6012)) {
             
             /*Scanner in = new Scanner(socket.getInputStream());
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -48,8 +39,8 @@ public class BClient {
                 
             }*/
             
-            Game g = new Game(socket);
-            g.addB();
+            Match g = new Match(socket);
+            g.run();
         }
     }
     

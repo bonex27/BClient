@@ -17,30 +17,18 @@ import java.util.Scanner;
  *
  * @author informatica
  */
-public class Game {
+public class Match {
     
     Scanner in; 
     PrintWriter out; 
     public Scanner scanner = new Scanner(System.in);
     private String log;
+    private String ArrofStr[];
     
-    public Game(Socket socket) throws IOException{
+    public Match(Socket socket) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
     }    
-    public void addB(){
-        String a;
-        visual();
-        //System.out.println("Inserisci le coordinate della barca");   
-        //System.out.println("X:");
-        
-        
-        //System.out.println(log);
-        //Y lunghezza v(verticale)/o(orizzontale)");
-        
-        //out.println(log);
-        //System.out.println(in.nextLine());
-    }
     
     /*private void attack(Scanner in, Scanner scanner, Scanner out){
         System.out.println("Inserisci le coordinate dove vuoi attaccare");
@@ -50,6 +38,17 @@ public class Game {
         
         System.out.println(in.nextLine());
     }*/
+    
+    public void run(){
+        System.out.println("run()");
+        log=in.nextLine();
+        ArrofStr=log.split("@",2);
+        switch(ArrofStr[0]){
+            case "p":
+                System.out.println(ArrofStr[0]+"posiziona");
+                break;
+        }
+    }
     
     public void visual(){
         //System.out.println("_____________________________________");
