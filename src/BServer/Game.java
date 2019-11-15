@@ -45,18 +45,17 @@ public class Game implements Runnable{
     public void run() 
     {
         try {
-            //        try {
+            //setup();
             
+            
+            input = new Scanner(socket.getInputStream());
+            output = new PrintWriter(socket.getOutputStream(),true);
             System.out.println(this.sName+ " connesso!");
+            output.println(this.sName);
             setup();
-            prova();
-            
-//            input = new Scanner(socket.getInputStream());
-//            output = new PrintWriter(socket.getOutputStream(),true);
-//            while(true)
-//            {
-//               output.println("Sei il " + this.sName);
-//               
+            //showMatrix();
+               output.println("Sei il " + this.sName);
+               
 //                for(int i = 0; i < i;i++)
 //                {
 //                    output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
@@ -65,22 +64,20 @@ public class Game implements Runnable{
 //                   // this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
 ////                   setup();
 //                }
-//
-//
-//
-//                 }
+
+
+
+                 
 
 //comando = input.nextLine();
                           
-//        }
-//        catch(IOException e)
-//        {
-//            System.out.println("Errore class player: " + e);
-//                // Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch(IOException e)
+        {
+            System.out.println("Errore class player: " + e);
+                // Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
    
     private void showMatrix()
@@ -198,24 +195,20 @@ public class Game implements Runnable{
     {
         //System.out.println(this.sName+ " connesso!");
          
+        while(true)
+        {
+            for(int i = 0; i <  Boats.size();i++)
+            {
+                output.println("Barca:"+Boats.get(i).nome+"Lunghezza: "+ Boats.get(i).iLunghezza);
+                String a = input.nextLine();
+                this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),arrOfStr[0].charAt(0),Boats.get(i).nome,Boats.get(i));
+            }
             
-            if(this.sName == '1')
-            {
-               
-                NavalBattleServer.currentPlayer=this;
-          
-                System.out.println("aspettare l'altro giocatore");
-            }
-            else
-            {
-                 NavalBattleServer.currentPlayer.opponent=this;
-                opponent=NavalBattleServer.currentPlayer;
-                
-            }
+        }
             
     }
     //controllo il turno del giocatore e se hai un avversario
-    public synchronized void move( Game player) {
+    public synchronized void move(Game player) {
         if (player != concurrent) {
             throw new IllegalStateException("Not your turn");
         } else if (player.opponent == null) {
@@ -225,15 +218,15 @@ public class Game implements Runnable{
         concurrent = concurrent.opponent;
     }
     
-    private void prova() throws IOException
-    {
-       
-            move(this);
-           while (input.hasNextLine())
-           {
-               output.println("cioa");
-           }
-    }
+//    private void prova() throws IOException
+//    {
+//       
+//            move(this);
+//           while (input.hasNextLine())
+//           {
+//               output.println("cioa");
+//           }
+//    }
 
 }
     
