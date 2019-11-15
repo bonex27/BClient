@@ -21,14 +21,13 @@ import java.util.logging.Logger;
 public class Game implements Runnable{
 
     private char sName;
-    Game opponent;
-    Game concurrent;
     Socket socket;
     Scanner input;
+    PrintWriter output;
     private ArrayList<Boat> Boats = new ArrayList<Boat>();
     private Box refGrid[][];
     private Box refOpponent[][];
-    PrintWriter output;
+    
 
     String[] arrOfStr;
     
@@ -45,37 +44,14 @@ public class Game implements Runnable{
     public void run() 
     {
         try {
-            //setup();                        
             input = new Scanner(socket.getInputStream());
             output = new PrintWriter(socket.getOutputStream(),true);
-            System.out.println(this.sName+ " connesso!");
-            output.println(this.sName);
-            setup();
-            //showMatrix();
-               output.println("Sei il " + this.sName);
-               
-//                for(int i = 0; i < i;i++)
-//                {
-//                      output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
-//                      comando = input.nextLine();
-//                      arrOfStr= comando.split("@", 4);
-//                   // this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
-////                   setup();
-//                }
-
-
-
-                 
-
-//comando = input.nextLine();
-                          
+            System.out.println(sName);
+            setup();           
+        }                 
+        catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(IOException e)
-        {
-            System.out.println("Errore class player: " + e);
-                // Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
    
     private void showMatrix()
@@ -191,18 +167,25 @@ public class Game implements Runnable{
   
     public void setup() throws IOException
     {
+        String comando;
         //System.out.println(this.sName+ " connesso!");
          
-        while(true)
-        {
-            for(int i = 0; i <  Boats.size();i++)
-            {
-                output.println("Barca:"+Boats.get(i).nome+"Lunghezza: "+ Boats.get(i).iLunghezza);
-                System.out.println(input.nextLine());
-                this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),arrOfStr[0].charAt(0),Boats.get(i).nome,Boats.get(i));
-            }
             
-        }
+            for(int i = 0; i < Boats.size();i++)
+                {
+                    output.println(this.sName+"@p");//client
+                    output.println(Boats.get(i).iLunghezza+"@"+Boats.get(i).nome);
+                    comando = input.nextLine();
+                    arrOfStr= comando.split("@", 10);
+                    this.setBoat(Integer.parseInt(arrOfStr[0]),Integer.parseInt(arrOfStr[1]),arrOfStr[2].charAt(0),Boats.get(i).nome,Boats.get(i));
+                   setup();
+                }
             
+       
     }
+    //controllo il turno del giocatore e se hai un avversario
+
+
 }
+    
+
