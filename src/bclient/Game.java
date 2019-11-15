@@ -27,7 +27,6 @@ public class Game {
     public Game(Socket socket) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
-        log = scanner.nextLine();
     }    
     public void addB(){
         String a;
@@ -56,8 +55,9 @@ public class Game {
         //System.out.println("_____________________________________");
         while(true){
             
-            out.println(scanner.nextLine());
+            System.out.println(in.nextLine());//lettura giocatore
             System.out.println(in.nextLine().replaceAll("#", "\n"));
+            out.println(scanner.nextLine());
         }
         //System.out.println("_____________________________________");
     }
