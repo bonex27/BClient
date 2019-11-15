@@ -29,7 +29,7 @@ public class BClient {
         
         //ip bonechi lai2-04 - "172.16.10.72"
         
-        try (Socket socket = new Socket("172.16.13.118" , 6012)) {
+        try (Socket socket = new Socket("127.0.0.1" , 6012)) {
             
             /*Scanner in = new Scanner(socket.getInputStream());
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

@@ -40,13 +40,20 @@ public class Match {
     }*/
     
     public void run(){
-        System.out.println("run()");
-        log=in.nextLine();
-        ArrofStr=log.split("@",2);
-        switch(ArrofStr[0]){
-            case "p":
-                System.out.println(ArrofStr[0]+"posiziona");
-                break;
+        while(true)
+        {
+            log=in.nextLine();
+            //System.out.println(log);
+            ArrofStr=log.split("@",2);
+            switch(ArrofStr[1]){
+                case "p":
+                    log=in.nextLine();
+                    //System.out.println(log);
+                    ArrofStr=log.split("@");
+                    System.out.println("Barca "+ArrofStr[1]+ "lunga "+ ArrofStr[0] );
+                    
+                    break;
+            }
         }
     }
     
