@@ -23,13 +23,28 @@ public class Match {
     PrintWriter out; 
     public Scanner scanner = new Scanner(System.in);
     private String log;
-    private String ArrofStr[];
+    private String ArrOfStr[];
     
     public Match(Socket socket) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
     }    
-    
+     
+    public void place(){
+        log = in.nextLine();
+        ArrOfStr = log.split("@",2);
+        
+        System.out.println("La barca "+ArrOfStr[1]+ " da posizionare è lunga "+ ArrOfStr[0] );
+        
+        System.out.println("Inserisci la x(0-20):");
+        log = scanner.nextLine()+"@";
+        System.out.println("Inserisci la y(0-20):");
+        log += scanner.nextLine()+"@";
+        System.out.println("In verticale(v) o in orizzontale(o):");
+        log += scanner.nextLine();
+        
+        out.println(log);
+    }
     /*private void attack(Scanner in, Scanner scanner, Scanner out){
         System.out.println("Inserisci le coordinate dove vuoi attaccare");
         
@@ -43,14 +58,24 @@ public class Match {
         while(true)
         {
             log=in.nextLine();
-            //System.out.println(log);
-            ArrofStr=log.split("@",2);
-            switch(ArrofStr[1]){
-                case "p":
-                    log=in.nextLine();
-                    //System.out.println(log);
-                    ArrofStr=log.split("@");
-                    System.out.println("Barca "+ArrofStr[1]+ "lunga "+ ArrofStr[0] );
+            ArrOfStr=log.split("@",2);
+            
+            switch(ArrOfStr[1]){
+                case "p":                               //Place
+                    do{
+                        place();
+                        log=in.nextLine();
+                        if(log=="false")
+                            System.out.println("Dati inseriti non accettabili, reinserire");
+                    }while(log=="false");
+                    
+                    break;
+                    
+                case "w":                               //wait
+                    
+                    break;
+                    
+                case "a":                               //attack
                     
                     break;
             }
