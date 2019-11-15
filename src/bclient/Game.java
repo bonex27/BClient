@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import jdk.internal.util.xml.impl.Input;
+
 
 
 /**
@@ -31,16 +31,16 @@ public class Game {
     }    
     public void addB(){
         String a;
+        visual();
+        //System.out.println("Inserisci le coordinate della barca");   
+        //System.out.println("X:");
         
-        System.out.println("Inserisci le coordinate della barca");   
-        System.out.println("X:");
         
-        
-        System.out.println(log);
+        //System.out.println(log);
         //Y lunghezza v(verticale)/o(orizzontale)");
         
-        out.println(log);
-        System.out.println(in.nextLine());
+        //out.println(log);
+        //System.out.println(in.nextLine());
     }
     
     /*private void attack(Scanner in, Scanner scanner, Scanner out){
