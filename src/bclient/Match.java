@@ -45,14 +45,16 @@ public class Match {
         
         out.println(log);
     }
-    /*private void attack(Scanner in, Scanner scanner, Scanner out){
-        System.out.println("Inserisci le coordinate dove vuoi attaccare");
+    private void attack(){
+        System.out.println("Inserisci le cordinate per l'attacco");
         
-        System.out.println("In formato: X Y");
-        out.println(scanner.nextLine());
+        System.out.println("Inserisci la x(0-20):");
+        log = scanner.nextLine()+"@";
+        System.out.println("Inserisci la y(0-20):");
+        log += scanner.nextLine();
         
-        System.out.println(in.nextLine());
-    }*/
+        out.println(log);
+    }
     
     public void run(){
         while(true)
@@ -65,18 +67,30 @@ public class Match {
                     do{
                         place();
                         log=in.nextLine();
-                        if(log=="false")
+                        if(log=="f")
                             System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(log=="false");
+                    }while(log=="f");
+                    
+                    System.out.println("Barca posizionata correttamente");
                     
                     break;
                     
                 case "w":                               //wait
-                    
+                    System.out.println("Turno dell'avversario");
                     break;
                     
                 case "a":                               //attack
-                    
+                    do{
+                        attack();
+                        log=in.nextLine();
+                        if(log=="c")
+                            System.out.println("Barca colpita");
+                        else if(log=="m")
+                            System.out.println("Barca mancata");
+                        else if(log=="f")
+                            System.out.println("Dati inseriti non accettabili, reinserire");
+                    }while(log!="f");
+                                      
                     break;
             }
         }
