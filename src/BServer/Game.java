@@ -45,9 +45,7 @@ public class Game implements Runnable{
     public void run() 
     {
         try {
-            //setup();
-            
-            
+            //setup();                        
             input = new Scanner(socket.getInputStream());
             output = new PrintWriter(socket.getOutputStream(),true);
             System.out.println(this.sName+ " connesso!");
@@ -58,9 +56,9 @@ public class Game implements Runnable{
                
 //                for(int i = 0; i < i;i++)
 //                {
-//                    output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
-////                    comando = input.nextLine();
-////                    arrOfStr= comando.split("@", 4);
+//                      output.println("Inserisci la barca"+ Boats.get(i).nome+ "di lunghezza "+ Boats.get(i).iLunghezza);
+//                      comando = input.nextLine();
+//                      arrOfStr= comando.split("@", 4);
 //                   // this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),char(arrOfStr[0]),Boats.get(i).nome);
 ////                   setup();
 //                }
@@ -200,34 +198,11 @@ public class Game implements Runnable{
             for(int i = 0; i <  Boats.size();i++)
             {
                 output.println("Barca:"+Boats.get(i).nome+"Lunghezza: "+ Boats.get(i).iLunghezza);
-                String a = input.nextLine();
+                System.out.println(input.nextLine());
                 this.setBoat(Integer.parseInt(arrOfStr[2]),Integer.parseInt(arrOfStr[3]),arrOfStr[0].charAt(0),Boats.get(i).nome,Boats.get(i));
             }
             
         }
             
     }
-    //controllo il turno del giocatore e se hai un avversario
-    public synchronized void move(Game player) {
-        if (player != concurrent) {
-            throw new IllegalStateException("Not your turn");
-        } else if (player.opponent == null) {
-            throw new IllegalStateException("You don't have an opponent yet");
-        } 
-        
-        concurrent = concurrent.opponent;
-    }
-    
-//    private void prova() throws IOException
-//    {
-//       
-//            move(this);
-//           while (input.hasNextLine())
-//           {
-//               output.println("cioa");
-//           }
-//    }
-
 }
-    
-
