@@ -54,6 +54,7 @@ public class Match {
         log += scanner.nextLine();
         
         out.println(log);
+        log="";//reset dopo invio
     }
     
     public void run(){
@@ -79,7 +80,9 @@ public class Match {
                     System.out.println("Turno dell'avversario");
                     break;
                     
-                case "a":                               //attack
+                case "a"
+                        
+                        :                               //attack
                     do{
                         attack();
                         log=in.nextLine();
