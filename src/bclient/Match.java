@@ -73,6 +73,7 @@ public class Match {
                     }while(log=="f");
                     
                     System.out.println("Barca posizionata correttamente");
+                    visual();
                     
                     break;
                     
@@ -101,12 +102,10 @@ public class Match {
     
     public void visual(){
         //System.out.println("_____________________________________");
-        while(true){
             
             System.out.println(in.nextLine());//lettura giocatore
             System.out.println(in.nextLine().replaceAll("#", "\n"));
-            out.println(scanner.nextLine());
-        }
+            //out.println(scanner.nextLine());       
         //System.out.println("_____________________________________");
     }
 
