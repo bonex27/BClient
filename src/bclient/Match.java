@@ -73,7 +73,7 @@ public class Match {
                     }while(log=="f");
                     
                     System.out.println("Barca posizionata correttamente");
-                    visual();
+                    //visual();
                     
                     break;
                     
