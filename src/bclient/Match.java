@@ -68,9 +68,9 @@ public class Match {
                     do{
                         place();
                         log=in.nextLine();
-                        if(log=="f")
+                        if(log=="NEAR")
                             System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(log=="f");
+                    }while(log=="NEAR");
                     
                     System.out.println("Barca posizionata correttamente");
                     //visual();
