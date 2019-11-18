@@ -95,7 +95,7 @@ public class Match {
                             System.out.println("Barca già colpita");
                         else if(log.equals("f"))
                             System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(!log.equals("f"));
+                    }while(log.equals("f"));
                     break;
                     
                 case "v":
