@@ -85,17 +85,17 @@ public class Match {
                     do{
                         attack();
                         log=in.nextLine();
-                        if(log=="c")
+                        if(log.equals("c"))
                             System.out.println("Barca colpita");
-                        else if(log=="d")
+                        else if(log.equals("d"))
                             System.out.println("Barca distrutta");
-                        else if(log=="m")
+                        else if(log.equals("m"))
                             System.out.println("Barca mancata");
-                        else if(log=="gc")
+                        else if(log.equals("gc"))
                             System.out.println("Barca già colpita");
-                        else if(log=="f")
+                        else if(log.equals("f"))
                             System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(log!="f");
+                    }while(!log.equals("f"));
                     break;
                     
                 case "v":
