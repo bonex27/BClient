@@ -81,9 +81,7 @@ public class Match {
                     System.out.println("Turno dell'avversario");
                     break;
                     
-                case "a"
-                        
-                        :                               //attack
+                case "a":                               //attack
                     do{
                         attack();
                         log=in.nextLine();
@@ -96,17 +94,17 @@ public class Match {
                     }while(log!="f");
                                       
                     break;
+                    
+                case "v":
+                    visual();
+                    break;
             }
         }
     }
     
     public void visual(){
-        //System.out.println("_____________________________________");
-            
-            System.out.println(in.nextLine());//lettura giocatore
+            out.println("stampa");
             System.out.println(in.nextLine().replaceAll("#", "\n"));
-            //out.println(scanner.nextLine());       
-        //System.out.println("_____________________________________");
     }
 
 }
