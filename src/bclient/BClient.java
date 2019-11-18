@@ -7,6 +7,7 @@ package bclient;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 
@@ -21,18 +22,15 @@ public class BClient {
      * @throws java.io.IOException
      */
     
-  
     public static void main(String[] args) throws IOException{
         
         //ip bonechi lai2-04 - "172.16.10.72"
+        System.out.println("Inserisci l'indirizzo ip o il dominio del server");
+        Scanner input = new Scanner(System.in);
         
-        try (Socket socket = new Socket("127.0.0.1" , 6012)) {
-                        
+        try (Socket socket = new Socket(input.nextLine() , 6012)) {
             Match g = new Match(socket);
             g.run();
         }
-                
     }
-    
-    
 }

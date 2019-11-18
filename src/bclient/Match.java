@@ -87,12 +87,15 @@ public class Match {
                         log=in.nextLine();
                         if(log=="c")
                             System.out.println("Barca colpita");
+                        else if(log=="d")
+                            System.out.println("Barca distrutta");
                         else if(log=="m")
                             System.out.println("Barca mancata");
+                        else if(log=="gc")
+                            System.out.println("Barca già colpita");
                         else if(log=="f")
                             System.out.println("Dati inseriti non accettabili, reinserire");
                     }while(log!="f");
-                                      
                     break;
                     
                 case "v":
@@ -103,8 +106,8 @@ public class Match {
     }
     
     public void visual(){
-            out.println("stampa");
-            System.out.println(in.nextLine().replaceAll("#", "\n"));
+        out.println("stampa");
+        System.out.println(in.nextLine().replaceAll("#", "\n"));
     }
 
 }
