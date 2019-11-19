@@ -88,7 +88,7 @@ public class Match {
                         if(log.equals("c"))
                             System.out.println("Barca colpita");
                         else if(log.equals("d"))
-                            System.out.println("Barca distrutta");
+                            System.out.println("Barca colpita e distrutta!");
                         else if(log.equals("m"))
                             System.out.println("Barca mancata");
                         else if(log.equals("gc"))
