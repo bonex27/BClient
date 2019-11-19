@@ -23,8 +23,8 @@ public class BClient {
      */
     
     public static void main(String[] args) throws IOException{
-        
         //ip bonechi lai2-04 - "172.16.10.72"
+        do{
         System.out.println("Inserisci l'indirizzo ip o il dominio del server");
         Scanner input = new Scanner(System.in);
         
@@ -32,5 +32,10 @@ public class BClient {
             Match g = new Match(socket);
             g.run();
         }
+        catch(Exception e)
+        {
+            System.out.println("Errore collegamento "+e);
+        }
+        }while(true);
     }
 }
