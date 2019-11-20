@@ -60,49 +60,75 @@ public class Match {
     public void run(){
         while(true)
         {
-            log=in.nextLine();
-            ArrOfStr=log.split("@",2);
-            
-            switch(ArrOfStr[1]){
-                case "p":                               //Place
-                    do{
-                        place();
-                        log=in.nextLine();
-                        if(log.equals("NEAR"))
-                            System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(log.equals("NEAR"));
-                    
-                    System.out.println("Barca posizionata correttamente");
-                    //visual();
-                    
-                    break;
-                    
-                case "w":                               //wait
-                    System.out.println("Turno dell'avversario");
-                    break;
-                    
-                case "a":                               //attack
-                    do{
-                        attack();
-                        log=in.nextLine();
-                        if(log.equals("c"))
-                            System.out.println("Barca colpita");
-                        else if(log.equals("d"))
-                            System.out.println("Barca distrutta");
-                        else if(log.equals("m"))
-                            System.out.println("Barca mancata");
-                        else if(log.equals("gc"))
-                            System.out.println("Barca già colpita");
-                        else if(log.equals("f"))
-                            System.out.println("Dati inseriti non accettabili, reinserire");
-                    }while(log.equals("f"));
-                    break;
-                    
-                case "v":
-                    visual();
-                    break;
+            try{
+                log=in.nextLine();
+                ArrOfStr=log.split("@",2);
+
+                System.out.println("Sei il giocatore " + ArrOfStr[0]);
+
+                switch(ArrOfStr[1]){
+                    case "p":                               //Place
+                        do{
+                            place();
+                            log=in.nextLine();
+                            if(log.equals("NEAR"))
+                                System.out.println("Dati inseriti non accettabili, reinserire");
+                        }while(log.equals("NEAR"));
+
+                        System.out.println("Barca posizionata correttamente");
+                        //visual();
+
+                        break;
+
+                    case "w":                               //wait
+                        System.out.println("Turno dell'avversario");
+                        break;
+
+                    case "a":                               //attack
+                        do{
+                            attack();
+                            log=in.nextLine();
+
+                            switch (log) {
+                                case "c":
+                                    System.out.println("Barca colpita");
+                                    break;
+                                case "d":
+                                    System.out.println("Barca distrutta");
+                                    break;
+                                case "m":
+                                    System.out.println("Barca mancata");
+                                    break;
+                                case "gc":
+                                    System.out.println("Barca già colpita");
+                                    break;
+                                case "f":
+                                    System.out.println("Dati inseriti non accettabili, reinserire");
+                                    break;
+                                case "win":
+                                    System.out.println("Hai vinto");
+                                    break;
+                                case "lose":
+                                    System.out.println("Hai perso");
+                                    break;
+                            }
+
+                            //out.println(ArrOfStr[0]+"@finito");
+
+                        }while(log.equals("f"));
+                        break;
+
+                    case "v":
+                        visual();
+                        break;
+                }
+            }
+            catch(Exception e){
+                System.out.println("err" + e);
+                break;
             }
         }
+        System.out.println("Gioco finito");
     }
     
     public void visual(){

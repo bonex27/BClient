@@ -25,6 +25,7 @@ public class BClient {
     public static void main(String[] args) throws IOException{
         
         //ip bonechi lai2-04 - "172.16.10.72"
+        
         System.out.println("Inserisci l'indirizzo ip o il dominio del server");
         Scanner input = new Scanner(System.in);
         
