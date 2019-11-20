@@ -6,15 +6,12 @@
 package bclient;
 
 
-import java.awt.GridLayout;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 
 
 
@@ -115,6 +112,7 @@ public class Match {
                                     break;
                                 case "win":
                                     System.out.println("Hai vinto");
+                                    this.socket.close();
                                     break;
                             }
 
@@ -135,7 +133,7 @@ public class Match {
                 System.out.println("err" + e);
                 break;
             }
-        }while(ArrOfStr[1].equals("lose"));
+        }while(!ArrOfStr[1].equals("lose"));
         
         System.out.println("Gioco finito");
         this.socket.close();
