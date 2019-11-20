@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 
@@ -143,5 +147,7 @@ public class Match {
         out.println("stampa");
         System.out.println(in.nextLine().replaceAll("#", "\n"));
     }
+
+    
 
 }
