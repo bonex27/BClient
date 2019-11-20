@@ -148,6 +148,81 @@ public class Match {
         System.out.println(in.nextLine().replaceAll("#", "\n"));
     }
 
-    
+    void run(JTextArea txtOutput, JTextField lblInput, JLabel lblPlayer, JButton btnOk,String mess) throws IOException 
+    {
+        
+        do{
+            try{
+                log=in.nextLine();
+                ArrOfStr=log.split("@",2);
+                lblPlayer.setText("Player "+ArrOfStr[0]);
+                mess+=("Sei il giocatore " + ArrOfStr[0]);
+                txtOutput.setText(mess);
+                switch(ArrOfStr[1]){
+                    case "p":                               //Place
+                        do{
+                            place();
+                            log=in.nextLine();
+                            if(log.equals("NEAR"))
+                                System.out.println("Dati inseriti non accettabili, reinserire");
+                        }while(log.equals("NEAR"));
+
+                        System.out.println("Barca posizionata correttamente");
+
+                        break;
+
+                    case "w":                               //wait
+                        System.out.println("Turno dell'avversario");
+                        break;
+
+                    case "a":                               //attack
+                        do{
+                            attack();
+                            log=in.nextLine();
+
+                            switch (log) {
+                                case "c":
+                                    System.out.println("Barca colpita");
+                                    break;
+                                case "d":
+                                    System.out.println("Barca distrutta");
+                                    break;
+                                case "m":
+                                    System.out.println("Barca mancata");
+                                    break;
+                                case "gc":
+                                    System.out.println("Barca già colpita");
+                                    break;
+                                case "f":
+                                    System.out.println("Dati inseriti non accettabili, reinserire");
+                                    break;
+                                case "win":
+                                    System.out.println("Hai vinto");
+                                    this.socket.close();
+                                    break;
+                            }
+
+                        }while(log.equals("f"));
+                        
+                        break;
+
+                    case "v":
+                        visual();
+                        break;
+                                                  
+                    case "lose":
+                        System.out.println("Hai perso");
+                        break;
+                }
+            }
+            catch(Exception e){
+                System.out.println("err" + e);
+                break;
+            }
+        }while(!ArrOfStr[1].equals("lose"));
+        
+        System.out.println("Gioco finito");
+        this.socket.close();
+    }
 
 }
