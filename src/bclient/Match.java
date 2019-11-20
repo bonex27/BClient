@@ -6,10 +6,15 @@
 package bclient;
 
 
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 
@@ -22,12 +27,13 @@ public class Match {
     Scanner in; 
     PrintWriter out; 
     public Scanner scanner = new Scanner(System.in);
-    private String log;
-    private String ArrOfStr[];
+    private String log, ArrOfStr[], init[];
+    Socket socket;
     
     public Match(Socket socket) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
+        this.socket = socket;
     }    
      
     public void place(){
@@ -39,12 +45,16 @@ public class Match {
         System.out.println("Inserisci la x(0-20):");
         log = scanner.nextLine()+"@";
         System.out.println("Inserisci la y(0-20):");
-        log += scanner.nextLine()+"@";
-        System.out.println("In verticale(v) o in orizzontale(o):");
         log += scanner.nextLine();
         
+        
+        System.out.println("In verticale(v) o in orizzontale(o):");
+        log += "@" + scanner.nextLine();
+             
         out.println(log);
     }
+    
+    
     private void attack(){
         System.out.println("Inserisci le cordinate per l'attacco");
         
@@ -57,9 +67,8 @@ public class Match {
         log="";//reset dopo invio
     }
     
-    public void run(){
-        while(true)
-        {
+    public void run() throws IOException{
+        do{
             try{
                 log=in.nextLine();
                 ArrOfStr=log.split("@",2);
@@ -76,7 +85,6 @@ public class Match {
                         }while(log.equals("NEAR"));
 
                         System.out.println("Barca posizionata correttamente");
-                        //visual();
 
                         break;
 
@@ -108,18 +116,18 @@ public class Match {
                                 case "win":
                                     System.out.println("Hai vinto");
                                     break;
-                                case "lose":
-                                    System.out.println("Hai perso");
-                                    break;
                             }
 
-                            //out.println(ArrOfStr[0]+"@finito");
-
                         }while(log.equals("f"));
+                        
                         break;
 
                     case "v":
                         visual();
+                        break;
+                                                  
+                    case "lose":
+                        System.out.println("Hai perso");
                         break;
                 }
             }
@@ -127,8 +135,10 @@ public class Match {
                 System.out.println("err" + e);
                 break;
             }
-        }
+        }while(ArrOfStr[1].equals("lose"));
+        
         System.out.println("Gioco finito");
+        this.socket.close();
     }
     
     public void visual(){
