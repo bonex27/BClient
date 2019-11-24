@@ -30,8 +30,9 @@ public class Match {
     public Scanner scanner = new Scanner(System.in);
     private String log, ArrOfStr[], init[];
     Socket socket;
+    prova3 Jmatrice;
     
-    public Match(Socket socket) throws IOException{
+    public Match(Socket socket,prova3 a) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
         this.socket = socket;
@@ -44,9 +45,9 @@ public class Match {
         System.out.println("La barca "+ArrOfStr[1]+ " da posizionare è lunga "+ ArrOfStr[0] );
         
         System.out.println("Inserisci la x(0-20):");
-        log = scanner.nextLine()+"@";
+        log += Jmatrice.x;
         System.out.println("Inserisci la y(0-20):");
-        log += scanner.nextLine();
+        log += Jmatrice.y;
         
         
         System.out.println("In verticale(v) o in orizzontale(o):");
