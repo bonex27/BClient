@@ -26,11 +26,11 @@ public class BClient {
         
         //ip bonechi lai2-04 - "172.16.10.72"
         
-        System.out.println("Inserisci l'indirizzo ip o il dominio del server");
-        Scanner input = new Scanner(System.in);
-        
-        try (Socket socket = new Socket(input.nextLine() , 6012)) {
-            Match g = new Match(socket);
+//        System.out.println("Inserisci l'indirizzo ip o il dominio del server");
+//        Scanner input = new Scanner(System.in);
+        prova3 a=new prova3(21,21);
+        try (Socket socket = new Socket("127.0.0.1" , 6012)) {
+            Match g = new Match(socket,a);
             g.run();
         }
     }
