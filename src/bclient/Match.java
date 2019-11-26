@@ -89,7 +89,7 @@ public class Match implements Runnable{
           }
         Jmatrice.l=false;
        log="";//reset dopo invio
-    }
+    } 
     
     /**
      *
