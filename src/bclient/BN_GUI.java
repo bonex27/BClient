@@ -40,7 +40,7 @@ public class BN_GUI implements MouseListener {
 
     public void setup(int width, int length) {
         oponent.setPreferredSize(new Dimension(423, 300));
-        //panel.setLayout(new GridLayout(width,length)); //set layout
+  
         panel.setPreferredSize(new Dimension(423, 300));
         grid = new JButton[width][length]; //allocate the size of grid
         opo = new JButton[width][length];
@@ -68,8 +68,6 @@ public class BN_GUI implements MouseListener {
         fram.add(lblPlayer, BorderLayout.CENTER);
         fram.setVisible(true);
         fram.pack();
-
-        //this.lblPlayerv.setLocation(900, 0);
         fram.show();
     }
 
@@ -86,45 +84,21 @@ public class BN_GUI implements MouseListener {
         x = Integer.parseInt(indici[0]);
         y = Integer.parseInt(indici[1]);
         name = indici[2];
-
-//              if(giocatore.equals("a")&&name.equals("p"))
-//              {
-//                     grid[x][y].setBackground(Color.yellow);
-//              }
-//              else if(giocatore.equals("b")&&name.equals("o"))
-//              {
-//                     opo[x][y].setBackground(Color.yellow);
-//              }
         l = true;
     }
     public void finalState()
     {
-        //JFrame a = new JFrame();
+        
         JOptionPane.showMessageDialog(new JFrame(),
     "Hai vinto!");
+        
     }
 
     @Override
-    public void mouseReleased(MouseEvent me) {
-
-//        String command = ((JButton) me.getSource()).getName();
-//            String[] indici = command.split(" ");
-//            x = Integer.parseInt(indici[0]);
-//            y = Integer.parseInt(indici[1]);
-//
-//            grid[x][y].setBackground(Color.getColor("255-255-255"));
-    }
+    public void mouseReleased(MouseEvent me) {}
 
     @Override
-    public void mouseEntered(MouseEvent me) {
-
-//            String command = ((JButton) me.getSource()).getName();
-//            String[] indici = command.split(" ");
-//            x = Integer.parseInt(indici[0]);
-//            y = Integer.parseInt(indici[1]);
-//
-//            grid[x][y].setBackground(Color.yellow);
-    }
+    public void mouseEntered(MouseEvent me) {}
 
     @Override
     public void mouseExited(MouseEvent me) {
