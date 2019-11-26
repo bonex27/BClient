@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  *
  * @author informatica
  */
-public class Match {
+public class Match implements Runnable{
     
     Scanner in; 
     PrintWriter out; 
@@ -31,11 +31,15 @@ public class Match {
     private String log, ArrOfStr[], init[];
     Socket socket;
     prova3 Jmatrice;
-    
+    int x,y;
+    String verso;
+    int iLung=0;
     public Match(Socket socket,prova3 a) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
         this.socket = socket;
+        Jmatrice=a;
+        Jmatrice.buttonEnable("a");
     }    
      
     public void place(){
@@ -43,39 +47,62 @@ public class Match {
         ArrOfStr = log.split("@",2);
         
         System.out.println("La barca "+ArrOfStr[1]+ " da posizionare è lunga "+ ArrOfStr[0] );
-        
-        System.out.println("Inserisci la x(0-20):");
-        log += Jmatrice.x;
-        System.out.println("Inserisci la y(0-20):");
-        log += Jmatrice.y;
-        
-        
-        System.out.println("In verticale(v) o in orizzontale(o):");
-        log += "@" + scanner.nextLine();
-             
+        iLung=Integer.parseInt(ArrOfStr[0]);
+        verso=ArrOfStr[1];
+       do{
+           
+           Jmatrice.label.setText("inserisci la barca di lunghezza "+iLung);
+           //System.out.println();
+           
+        }while(Jmatrice.l!=true);
+           if(Jmatrice.l==true){
+       
+        log += "@"+Jmatrice.y+"@";
+         log +=Jmatrice.x;
+          
+        Jmatrice.l=false;
+            }
+    
+       
         out.println(log);
+       
+       
     }
     
     
     private void attack(){
-        System.out.println("Inserisci le cordinate per l'attacco");
+       
         
-        System.out.println("Inserisci la x(0-20):");
-        log = scanner.nextLine()+"@";
-        System.out.println("Inserisci la y(0-20):");
-        log += scanner.nextLine();
+         do{
+           
+          Jmatrice.label.setText("inserisci la barca  che vuoi attaccare ");
+          Jmatrice.labelError.setText("");
+        }while(Jmatrice.l!=true);
+         
+          if(Jmatrice.l==true){
         
+        log += "@"+Jmatrice.y+"@";
+        y=Jmatrice.y;
+        log += Jmatrice.x;
+        x=Jmatrice.x;
         out.println(log);
-        log="";//reset dopo invio
+          }
+        Jmatrice.l=false;
+       log="";//reset dopo invio
     }
     
-    public void run() throws IOException{
+    /**
+     *
+     * @throws IOException
+     */
+    
+    public void runi() throws IOException{
         do{
             try{
                 log=in.nextLine();
                 ArrOfStr=log.split("@",2);
 
-                System.out.println("Sei il giocatore " + ArrOfStr[0]);
+               //Jmatrice.label.setText("Sei il giocatore " + ArrOfStr[0]);
 
                 switch(ArrOfStr[1]){
                     case "p":                               //Place
@@ -83,10 +110,13 @@ public class Match {
                             place();
                             log=in.nextLine();
                             if(log.equals("NEAR"))
-                                System.out.println("Dati inseriti non accettabili, reinserire");
+                            {
+                               Jmatrice.labelError.setText("Dati inseriti non accettabili, reinserire");
+                            }
                         }while(log.equals("NEAR"));
 
-                        System.out.println("Barca posizionata correttamente");
+                        Jmatrice.label.setText("Barca posizionata correttamente");
+                        Jmatrice.insert(verso,iLung);
 
                         break;
 
@@ -96,27 +126,35 @@ public class Match {
 
                     case "a":                               //attack
                         do{
+                            
+                            Jmatrice.buttonEnable("b");
                             attack();
+                            
                             log=in.nextLine();
 
                             switch (log) {
                                 case "c":
-                                    System.out.println("Barca colpita");
+                                    Jmatrice.label.setText("Barca colpita");
+                                    Jmatrice.opponent(x,y,"c");
+                                    
+                                    
+                                    
                                     break;
                                 case "d":
-                                    System.out.println("Barca distrutta");
+                                    Jmatrice.label.setText("Barca distrutta");
+                                    Jmatrice.opponent(x,y,"d");
                                     break;
                                 case "m":
-                                    System.out.println("Barca mancata");
+                                    Jmatrice.opponent(x,y,"m");;
                                     break;
                                 case "gc":
-                                    System.out.println("Barca già colpita");
+                                     Jmatrice.label.setText("Barca già colpita");
                                     break;
                                 case "f":
                                     System.out.println("Dati inseriti non accettabili, reinserire");
                                     break;
                                 case "win":
-                                    System.out.println("Hai vinto");
+                                    Jmatrice.label.setText("Hai vinto");
                                     this.socket.close();
                                     break;
                             }
@@ -147,6 +185,11 @@ public class Match {
     public void visual(){
         out.println("stampa");
         System.out.println(in.nextLine().replaceAll("#", "\n"));
+    }
+
+    @Override
+    public void run() {
+        
     }
 
     
