@@ -7,12 +7,16 @@ package bclient;
 
 
 
+import java.awt.EventQueue;
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -40,8 +44,7 @@ public class Match implements Runnable{
         this.socket = socket;
         Jmatrice=a;
         Jmatrice.buttonEnable("a");
-    }    
-     
+    }
     public void place(){
         log = in.nextLine();
         ArrOfStr = log.split("@",2);
@@ -51,7 +54,9 @@ public class Match implements Runnable{
         verso=ArrOfStr[1];
        do{
            
-           Jmatrice.label.setText("inserisci la barca di lunghezza "+iLung);
+              Jmatrice.label.setText("inserisci la barca di lunghezza "+iLung); 
+
+           
            //System.out.println();
            
         }while(Jmatrice.l!=true);
@@ -102,7 +107,7 @@ public class Match implements Runnable{
             try{
                 log=in.nextLine();
                 ArrOfStr=log.split("@");
-
+                Jmatrice.lblPlayer.setText("Player "+ ArrOfStr[0]);
                //Jmatrice.label.setText("Sei il giocatore " + ArrOfStr[0]);
 
                 switch(ArrOfStr[1]){
@@ -120,11 +125,6 @@ public class Match implements Runnable{
                         Jmatrice.insert(verso,iLung);
 
                         break;
-
-                    case "w":                               //wait
-                        System.out.println("Turno dell'avversario");
-                        break;
-
                     case "a":                               //attack
                         do{
                             
@@ -158,8 +158,8 @@ public class Match implements Runnable{
                                     break;
                                 case "win":
                                     Jmatrice.label.setText("Hai vinto");
-                                    this.socket.close();
-                                    break;
+                                    this.Jmatrice.finalState();
+                                
                             }
 
                         }while(log.equals("f"));
@@ -171,7 +171,14 @@ public class Match implements Runnable{
                         break;
                                                   
                     case "lose":
-                        System.out.println("Hai perso");
+                        Jmatrice.label.setText("Hai perso");
+                        JOptionPane.showMessageDialog(new JFrame(),
+                            "Hai perso!");
+                        break;
+                    case "win":
+                        Jmatrice.label.setText("Hai vinto!");
+                        this.Jmatrice.finalState();
+                        //this.socket.close();
                         break;
                 }
             }
