@@ -7,14 +7,14 @@ package bclient;
 
 
 
-
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Panel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 
@@ -39,7 +39,7 @@ public class Match implements Runnable{
         out = new PrintWriter(socket.getOutputStream(), true);
         this.socket = socket;
         Jmatrice=a;
-        //Jmatrice.buttonEnable("a");
+        Jmatrice.buttonEnable("a");
     }    
      
     public void place(){
@@ -72,7 +72,7 @@ public class Match implements Runnable{
     
     private void attack(){
        
-        
+       
          do{
            
           Jmatrice.label.setText("inserisci la barca  che vuoi attaccare ");
@@ -88,6 +88,7 @@ public class Match implements Runnable{
         out.println(log);
           }
         Jmatrice.l=false;
+        Jmatrice.label.setText("inserisci la barca  che vuoi attaccare ");
        log="";//reset dopo invio
     } 
     
@@ -100,7 +101,7 @@ public class Match implements Runnable{
         do{
             try{
                 log=in.nextLine();
-                ArrOfStr=log.split("@",2);
+                ArrOfStr=log.split("@");
 
                //Jmatrice.label.setText("Sei il giocatore " + ArrOfStr[0]);
 
@@ -116,10 +117,7 @@ public class Match implements Runnable{
                         }while(log.equals("NEAR"));
 
                         Jmatrice.label.setText("Barca posizionata correttamente");
-                        EventQueue.invokeLater(() -> {
-                            Jmatrice.insert(verso,iLung);
-                        });
-                        
+                        Jmatrice.insert(verso,iLung);
 
                         break;
 
@@ -131,24 +129,26 @@ public class Match implements Runnable{
                         do{
                             
                             Jmatrice.buttonEnable("b");
+                            if(ArrOfStr.length>2)
+                            Jmatrice.grid(Integer.parseInt(ArrOfStr[3]),Integer.parseInt(ArrOfStr[2]),ArrOfStr[4]);
                             attack();
-                            
+                            log="";
                             log=in.nextLine();
-
+                            
+                              
                             switch (log) {
                                 case "c":
                                     Jmatrice.label.setText("Barca colpita");
                                     Jmatrice.opponent(x,y,"c");
-                                    
-                                    
-                                    
+
                                     break;
                                 case "d":
                                     Jmatrice.label.setText("Barca distrutta");
                                     Jmatrice.opponent(x,y,"d");
                                     break;
                                 case "m":
-                                    Jmatrice.opponent(x,y,"m");;
+                                    Jmatrice.label.setText("Mancata");
+                                    Jmatrice.opponent(x,y,"m");
                                     break;
                                 case "gc":
                                      Jmatrice.label.setText("Barca già colpita");
