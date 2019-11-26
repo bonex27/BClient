@@ -173,12 +173,14 @@ public class Match implements Runnable{
                     case "lose":
                         Jmatrice.label.setText("Hai perso");
                         JOptionPane.showMessageDialog(new JFrame(),
-                            "Hai perso!");
+                           "Hai perso!");
+                        this.socket.close();
                         break;
                     case "win":
                         Jmatrice.label.setText("Hai vinto!");
-                        this.Jmatrice.finalState();
-                        //this.socket.close();
+                        JOptionPane.showMessageDialog(new JFrame(),
+                            "Hai perso!");
+                        this.socket.close();
                         break;
                 }
             }
