@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  */
 public class prova3 implements MouseListener
 {
-        JFrame fram=new JFrame(); //creates frame
+        JFrame fram=new JFrame("Battaglia navale"); //creates frame
         JButton[][] grid; //names the grid of button
         JPanel panel=new JPanel();
         JPanel oponent =new JPanel();
@@ -27,8 +27,10 @@ public class prova3 implements MouseListener
         int x,y;
         String name;
         String giocatore="a";
- 
-       
+          boolean l=false;
+          JLabel label=new JLabel("ciao");
+           JLabel labelError=new JLabel();
+          
  
         
         
@@ -50,10 +52,10 @@ public class prova3 implements MouseListener
 		for(int x=0; x<width; x++){
                    grid[y][x]=new JButton();
                    grid[y][x].setPreferredSize(new Dimension(15,15));
-                   grid[y][x].setName(x+" "+y+" "+"p");
+                   grid[y][x].setName(y+" "+x+" "+"p");
                    opo[y][x]=new JButton(); //creates new button
                    opo[y][x].setPreferredSize(new Dimension(15,15));
-                   opo[y][x].setName(x+" "+y+" "+"o");
+                   opo[y][x].setName(y+" "+x+" "+"o");
                    grid[y][x].addMouseListener(this);
                    opo[y][x].addMouseListener(this);
 		   panel.add(grid[y][x]); //adds button to grid
@@ -61,11 +63,13 @@ public class prova3 implements MouseListener
                                             }
                                    }
    
-                
+              
               fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
               fram.setPreferredSize(new Dimension(1024, 490));
               fram.add(panel,BorderLayout.WEST);
               fram.add(oponent,BorderLayout.EAST);
+              fram.add(label,BorderLayout.NORTH);
+              fram.add(labelError,BorderLayout.SOUTH);
               fram.setVisible(true);
               fram.pack();
               fram.show();
@@ -82,19 +86,19 @@ public class prova3 implements MouseListener
            
           String command = ((JButton) me.getSource()).getName();
             String[] indici=command.split(" ");
-             y=Integer.parseInt(indici[0]);
-             x=Integer.parseInt(indici[1]);
+             x=Integer.parseInt(indici[0]);
+             y=Integer.parseInt(indici[1]);
              name=indici[2];
             
-              if(giocatore.equals("a")&&name.equals("p"))
-              {
-                     grid[x][y].setBackground(Color.yellow);
-              }
-              else if(giocatore.equals("b")&&name.equals("o"))
-              {
-                     opo[x][y].setBackground(Color.yellow);
-              }
-            
+//              if(giocatore.equals("a")&&name.equals("p"))
+//              {
+//                     grid[x][y].setBackground(Color.yellow);
+//              }
+//              else if(giocatore.equals("b")&&name.equals("o"))
+//              {
+//                     opo[x][y].setBackground(Color.yellow);
+//              }
+            l=true;
     }
 
     @Override
@@ -107,6 +111,7 @@ public class prova3 implements MouseListener
    
     public String buttonEnable(String a)
     {
+        giocatore=a;
         for(int y=0; y<21; y++){
 		for(int x=0; x<21; x++){
                     if(a.equals("a"))
@@ -124,5 +129,43 @@ public class prova3 implements MouseListener
                 }
                 }
         return a;
+    }
+    
+    public void insert(String a,int iLung)
+    {
+        int Xa=x;
+        int Ya=y;
+        if(a.equals("o"))
+            {
+              for(int i = Ya; i < Ya+iLung;i++)
+                   {
+                     grid[x][i].setBackground(Color.yellow);
+
+                   }
+               
+            }
+            else if(a.equals("v"))
+            {
+                for(int g=Xa; g<Xa+iLung;g++)
+                   {
+                      grid[g][y].setBackground(Color.yellow);
+                   }
+                
+            }           
+    }
+    
+    public void opponent(int a,int b,String PosAttack)
+    {
+        if(PosAttack.equals("d")||PosAttack.equals("c"))
+        {
+         opo[a][b].setBackground(Color.RED);   
+        }
+        else if(PosAttack.equals("m"))
+         opo[a][b].setBackground(Color.BLUE);   
+    }
+    public void grid(int a,int b)
+    {
+        opo[a][b].setBackground(Color.RED);
+        
     }
 }
