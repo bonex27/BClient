@@ -58,7 +58,7 @@ public class prova3 implements MouseListener {
                 oponent.add(opo[y][x]);
             }
         }
-
+        fram.setResizable(false);
         fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fram.setPreferredSize(new Dimension(1024, 490));
         fram.add(panel, BorderLayout.WEST);

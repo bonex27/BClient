@@ -93,7 +93,7 @@ public class Match implements Runnable{
         out.println(log);
           }
         Jmatrice.l=false;
-        Jmatrice.label.setText("inserisci la barca  che vuoi attaccare ");
+        Jmatrice.label.setText("E' il tuo turno!");
        log="";//reset dopo invio
     } 
     
@@ -155,11 +155,7 @@ public class Match implements Runnable{
                                     break;
                                 case "f":
                                     System.out.println("Dati inseriti non accettabili, reinserire");
-                                    break;
-                                case "win":
-                                    Jmatrice.label.setText("Hai vinto");
-                                    this.Jmatrice.finalState();
-                                
+                                    break;                                
                             }
 
                         }while(log.equals("f"));
@@ -179,7 +175,7 @@ public class Match implements Runnable{
                     case "win":
                         Jmatrice.label.setText("Hai vinto!");
                         JOptionPane.showMessageDialog(new JFrame(),
-                            "Hai perso!");
+                            "Hai vinto!");
                         this.socket.close();
                         break;
                 }
