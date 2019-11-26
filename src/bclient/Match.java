@@ -34,11 +34,11 @@ public class Match implements Runnable{
     public Scanner scanner = new Scanner(System.in);
     private String log, ArrOfStr[], init[];
     Socket socket;
-    prova3 Jmatrice;
+    BN_GUI Jmatrice;
     int x,y;
     String verso;
     int iLung=0;
-    public Match(Socket socket,prova3 a) throws IOException{
+    public Match(Socket socket,BN_GUI a) throws IOException{
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
         this.socket = socket;

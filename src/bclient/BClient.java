@@ -30,7 +30,7 @@ public class BClient {
         System.out.println("Inserisci l'indirizzo ip o il dominio del server");
         Scanner input = new Scanner(System.in);
         ip =input.nextLine();
-        prova3 a=new prova3(21,21);
+        BN_GUI a=new BN_GUI(21,21);
         
          try (Socket socket = new Socket("127.0.0.1" , 6012)) {
             Match g = new Match(socket,a);

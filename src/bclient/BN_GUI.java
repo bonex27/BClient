@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author admirportatile
  */
-public class prova3 implements MouseListener {
+public class BN_GUI implements MouseListener {
 
     JFrame fram = new JFrame("Battaglia navale"); //creates frame
     JButton[][] grid; //names the grid of button
@@ -34,7 +34,7 @@ public class prova3 implements MouseListener {
     JLabel labelError = new JLabel();
     JLabel lblPlayer = new JLabel();
 
-    public prova3(int width, int length) {
+    public BN_GUI(int width, int length) {
         setup(width, length);
     }
 
