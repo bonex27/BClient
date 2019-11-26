@@ -7,14 +7,14 @@ package bclient;
 
 
 
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Panel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 
@@ -39,7 +39,7 @@ public class Match implements Runnable{
         out = new PrintWriter(socket.getOutputStream(), true);
         this.socket = socket;
         Jmatrice=a;
-        Jmatrice.buttonEnable("a");
+        //Jmatrice.buttonEnable("a");
     }    
      
     public void place(){
@@ -116,7 +116,10 @@ public class Match implements Runnable{
                         }while(log.equals("NEAR"));
 
                         Jmatrice.label.setText("Barca posizionata correttamente");
-                        Jmatrice.insert(verso,iLung);
+                        EventQueue.invokeLater(() -> {
+                            Jmatrice.insert(verso,iLung);
+                        });
+                        
 
                         break;
 
