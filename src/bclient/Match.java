@@ -51,7 +51,7 @@ public class Match implements Runnable {
         verso = ArrOfStr[1];
         do {
 
-            Jmatrice.label.setText("inserisci la barca di lunghezza " + iLung);
+            Jmatrice.label.setText("La barca " + " da posizionare è lunga " + ArrOfStr[0] + " orientata "+ ArrOfStr[1] );
 
             //System.out.println();
         } while (Jmatrice.l != true);

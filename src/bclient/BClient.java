@@ -28,7 +28,7 @@ public class BClient {
             ip = input.nextLine();
             BN_GUI a = new BN_GUI(21, 21);
 
-            try (Socket socket = new Socket("127.0.0.1", 6012)) {
+            try (Socket socket = new Socket(ip, 6012)) {
                 Match g = new Match(socket, a);
                 g.runi();
             } catch (Exception e) {
